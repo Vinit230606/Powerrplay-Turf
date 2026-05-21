@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import heroImg from "../assets/images/hero.png";
 
@@ -65,22 +64,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 cursor-pointer text-white/50 hover:text-white transition-colors"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        onClick={() => scrollTo('sports')}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="flex flex-col items-center"
-        >
-          <span className="text-xs font-bold uppercase tracking-widest mb-2">Scroll</span>
-          <ChevronDown size={24} />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
