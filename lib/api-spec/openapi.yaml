@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: bookings
+    description: Slot booking operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,89 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /bookings/slots:
+    get:
+      operationId: getSlots
+      tags: [bookings]
+      summary: Get available time slots for a sport on a given date
+      parameters:
+        - name: sport
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of time slots with availability and pricing
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimeSlot"
+
+  /bookings/order:
+    post:
+      operationId: createBookingOrder
+      tags: [bookings]
+      summary: Create a Razorpay order for a slot booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingOrderInput"
+      responses:
+        "201":
+          description: Razorpay order created, pending payment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookingOrder"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Slot already booked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /bookings/verify:
+    post:
+      operationId: verifyPayment
+      tags: [bookings]
+      summary: Verify Razorpay payment signature and confirm booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentVerification"
+      responses:
+        "200":
+          description: Payment verified and booking confirmed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookingConfirmation"
+        "400":
+          description: Invalid payment signature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +119,86 @@ components:
       required:
         - status
 
+    TimeSlot:
+      type: object
+      required: [time, label, available, priceRupees]
+      properties:
+        time:
+          type: string
+          description: 24h time string, e.g. "06:00"
+        label:
+          type: string
+          description: Display label, e.g. "06:00 AM"
+        available:
+          type: boolean
+        priceRupees:
+          type: integer
+
+    BookingOrderInput:
+      type: object
+      required: [sport, date, timeSlot, name, phone, players]
+      properties:
+        sport:
+          type: string
+          enum: [cricket, football, badminton]
+        date:
+          type: string
+          description: ISO date string YYYY-MM-DD
+        timeSlot:
+          type: string
+          description: 24h time string, e.g. "18:00"
+        name:
+          type: string
+          minLength: 2
+        phone:
+          type: string
+          minLength: 10
+        players:
+          type: integer
+          minimum: 1
+
+    BookingOrder:
+      type: object
+      required: [razorpayOrderId, amountPaise, currency, keyId, bookingId]
+      properties:
+        razorpayOrderId:
+          type: string
+        amountPaise:
+          type: integer
+        currency:
+          type: string
+        keyId:
+          type: string
+        bookingId:
+          type: integer
+
+    PaymentVerification:
+      type: object
+      required: [bookingId, razorpayOrderId, razorpayPaymentId, razorpaySignature]
+      properties:
+        bookingId:
+          type: integer
+        razorpayOrderId:
+          type: string
+        razorpayPaymentId:
+          type: string
+        razorpaySignature:
+          type: string
+
+    BookingConfirmation:
+      type: object
+      required: [success, bookingId, bookingRef]
+      properties:
+        success:
+          type: boolean
+        bookingId:
+          type: integer
+        bookingRef:
+          type: string
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
