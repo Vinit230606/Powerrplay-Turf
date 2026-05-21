@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "H6vOSLeKKJN1RE1E4BQiZ"
+uri = "file://artifacts/power-play-turf/src/assets/images/hero.png"
+type = "image"
+title = "Hero turf night"
+
+[[generated]]
+id = "jnIEzwmI3iEh_QBywGicf"
+uri = "file://artifacts/power-play-turf/src/assets/images/cricket.png"
+type = "image"
+title = "Cricket card"
+
+[[generated]]
+id = "bzirE-qS1PmAbq7KL8Ule"
+uri = "file://artifacts/power-play-turf/src/assets/images/football.png"
+type = "image"
+title = "Football card"
+
+[[generated]]
+id = "B-x5jD5vFgpB5kDlKP0Cw"
+uri = "file://artifacts/power-play-turf/src/assets/images/badminton.png"
+type = "image"
+title = "Badminton card"
+
+[[generated]]
+id = "oE_Clkv9HWOM4EQibkmCi"
+uri = "file://artifacts/power-play-turf/src/assets/images/gallery-1.png"
+type = "image"
+title = "Gallery cricket batting"
+
+[[generated]]
+id = "L7KjarSX01kL8hYGaMmDo"
+uri = "file://artifacts/power-play-turf/src/assets/images/gallery-2.png"
+type = "image"
+title = "Gallery football celebration"
+
+[[generated]]
+id = "gUhhO5nuj5qo91W7QSQBM"
+uri = "file://artifacts/power-play-turf/src/assets/images/gallery-3.png"
+type = "image"
+title = "Gallery badminton smash"
+
+[[generated]]
+id = "GjBQ6IiFosvLcJDgeFmdN"
+uri = "file://artifacts/power-play-turf/src/assets/images/gallery-4.png"
+type = "image"
+title = "Gallery aerial view"
+
+[[generated]]
+id = "uJSvDnQ-o6Z2Vuc9JGA-l"
+uri = "file://artifacts/power-play-turf/src/assets/images/gallery-5.png"
+type = "image"
+title = "Gallery team building"
+
+[[generated]]
+id = "RbW6flOAxSYmPgarRyZwb"
+uri = "file://artifacts/power-play-turf/src/assets/images/gallery-6.png"
+type = "image"
+title = "Gallery cricket bowling"
