@@ -10,7 +10,7 @@ export function ContactSection() {
     const name = formData.get("name");
     const message = formData.get("message");
     
-    const whatsappUrl = `https://wa.me/917990000000?text=Hi, this is ${name}. %0A${message}`;
+    const whatsappUrl = `https://wa.me/919558923855?text=Hi, this is ${name}. %0A${message}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -53,7 +53,7 @@ export function ContactSection() {
                 <Phone className="text-primary mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-secondary uppercase mb-1">Call Us</h4>
-                  <a href="tel:+917990000000" className="text-gray-600 hover:text-primary transition-colors">+91 79905 XXXXX</a>
+                  <a href="tel:+919558923855" className="text-gray-600 hover:text-primary transition-colors">+91 95589 23855</a>
                 </div>
               </div>
               

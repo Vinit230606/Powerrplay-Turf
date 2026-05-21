@@ -77,7 +77,7 @@ export function BookingSection() {
     
     const message = `Hi Power Play Turf!%0A%0AI would like to book a slot.%0A%0A*Sport:* ${sportName}%0A*Date:* ${formattedDate}%0A*Time:* ${values.time}%0A*Players:* ${values.players}%0A%0A*Name:* ${values.name}%0A*Phone:* ${values.phone}%0A%0APlease confirm availability.`;
     
-    const whatsappUrl = `https://wa.me/917990000000?text=${message}`;
+    const whatsappUrl = `https://wa.me/919558923855?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
 
