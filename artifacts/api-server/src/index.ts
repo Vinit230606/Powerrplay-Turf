@@ -1,14 +1,17 @@
 import app from "./app";
 import { logger } from "./lib/logger";
 
-const rawPort = process.env["PORT"];
+// Validate required environment variables
+const requiredEnvVars = ["DATABASE_URL", "RAZORPAY_KEY_ID", "RAZORPAY_KEY_SECRET"];
+const missingVars = requiredEnvVars.filter(v => !process.env[v]);
 
-if (!rawPort) {
+if (missingVars.length > 0) {
   throw new Error(
-    "PORT environment variable is required but was not provided.",
+    `Missing required environment variables: ${missingVars.join(", ")}`
   );
 }
 
+const rawPort = process.env["PORT"] || "5000";
 const port = Number(rawPort);
 
 if (Number.isNaN(port) || port <= 0) {

@@ -1,0 +1,21 @@
+# Ignore unnecessary files and directories for Vercel
+.git
+.gitignore
+.env.local
+.env.*.local
+*.md
+!README.md
+!WEBSITE_DETAILS.md
+node_modules
+pnpm-lock.yaml
+.DS_Store
+.vscode
+.replit
+replit.md
+dist
+build
+coverage
+.turbo
+.next
+.pnpm-store
+attached_assets
