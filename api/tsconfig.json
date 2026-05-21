@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../dist/api",
+    "rootDir": ".",
+    "composite": false,
+    "noEmit": true
+  },
+  "include": ["./**/*.ts"],
+  "references": [
+    { "path": "../artifacts/api-server" },
+    { "path": "../lib/db" },
+    { "path": "../lib/site-config" },
+    { "path": "../lib/api-zod" }
+  ]
+}

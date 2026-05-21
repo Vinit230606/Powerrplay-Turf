@@ -5,12 +5,34 @@ Marketing and booking website for a multi-sport turf facility in Laxmipura, Vado
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm --filter @workspace/power-play-turf run dev` — run the frontend (requires `PORT` and `BASE_PATH` env)
+- `pnpm --filter @workspace/power-play-turf run dev` — run the frontend (PORT defaults to 3000, BASE_PATH defaults to /)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`
+
+## Supabase + Vercel Deployment
+
+### Database (Supabase)
+1. Create a project at [supabase.com](https://supabase.com)
+2. Go to **Project Settings → Database → Connection string → Transaction pooler** (port 6543)
+3. Copy the connection string — use it as `DATABASE_URL`
+4. Run `pnpm --filter @workspace/db run push` once to create the `bookings` table
+
+### Deploy to Vercel
+1. Push to GitHub
+2. Import the repo at [vercel.com/new](https://vercel.com/new)
+3. Set these environment variables in Vercel dashboard:
+   - `DATABASE_URL` — Supabase Transaction pooler URL
+   - `RAZORPAY_KEY_ID` — your Razorpay key ID
+   - `RAZORPAY_KEY_SECRET` — your Razorpay key secret
+4. Deploy — Vercel auto-detects `vercel.json` and builds the frontend + API
+
+### Architecture on Vercel
+- **Frontend** — static React/Vite build served from `artifacts/power-play-turf/dist/public/`
+- **API** — `api/index.ts` wraps the Express app as a Vercel Serverless Function
+- **Database** — Supabase PostgreSQL via `postgres` (postgres.js) driver with `max:1` for serverless
 
 ## Stack
 
