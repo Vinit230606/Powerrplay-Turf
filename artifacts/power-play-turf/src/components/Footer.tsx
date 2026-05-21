@@ -1,4 +1,5 @@
-import { Instagram, MapPin, Phone, Mail } from "lucide-react";
+import { Instagram, MapPin, Phone } from "lucide-react";
+import { SITE, CONTACT, SOCIAL, SPORTS } from "@/config/site";
 
 export function Footer() {
   const scrollTo = (id: string, e: React.MouseEvent) => {
@@ -18,9 +19,9 @@ export function Footer() {
             <a href="#home" onClick={(e) => scrollTo('home', e)} className="text-2xl font-heading font-black tracking-tight text-white uppercase mb-4 inline-block">
               POWER PLAY <span className="text-primary">TURF</span>
             </a>
-            <p className="mb-6 font-medium italic">"Your Game. Your Ground. Vadodara."</p>
+            <p className="mb-6 font-medium italic">&quot;{SITE.tagline}&quot;</p>
             <div className="flex gap-4">
-              <a href="https://instagram.com/power_playturf" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors text-white">
+              <a href={SOCIAL.instagram.url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors text-white">
                 <Instagram size={20} />
               </a>
             </div>
@@ -46,9 +47,11 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-bold text-white uppercase tracking-wider mb-6">Sports</h4>
             <ul className="space-y-3">
-              <li><a href="#book" onClick={(e) => scrollTo('book', e)} className="hover:text-primary transition-colors">Box Cricket</a></li>
-              <li><a href="#book" onClick={(e) => scrollTo('book', e)} className="hover:text-primary transition-colors">5-a-side Football</a></li>
-              <li><a href="#book" onClick={(e) => scrollTo('book', e)} className="hover:text-primary transition-colors">Badminton</a></li>
+              {SPORTS.map((sport) => (
+                <li key={sport.id}>
+                  <a href="#book" onClick={(e) => scrollTo('book', e)} className="hover:text-primary transition-colors">{sport.footerName}</a>
+                </li>
+              ))}
               <li><a href="#contact" onClick={(e) => scrollTo('contact', e)} className="hover:text-primary transition-colors">Corporate Booking</a></li>
             </ul>
           </div>
@@ -58,11 +61,11 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="text-primary shrink-0 mt-0.5" />
-                <span>Laxmipura Rd, Opp. Shree Harifarm, Vadodara, Gujarat 390023</span>
+                <span>{CONTACT.address.short}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={20} className="text-primary shrink-0" />
-                <a href="tel:+919558923855" className="hover:text-white transition-colors">+91 95589 23855</a>
+                <a href={`tel:${CONTACT.phoneE164}`} className="hover:text-white transition-colors">{CONTACT.phoneDisplay}</a>
               </li>
             </ul>
           </div>
@@ -70,7 +73,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
-          <p>&copy; {new Date().getFullYear()} Power Play Turf. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
           <p>Designed for the Love of Sport</p>
         </div>
       </div>

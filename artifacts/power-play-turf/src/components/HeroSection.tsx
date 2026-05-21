@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import heroImg from "../assets/images/hero.png";
+import { SITE } from "@/config/site";
 
 export function HeroSection() {
   const scrollTo = (id: string) => {
@@ -33,7 +34,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <span className="inline-block py-1 px-3 rounded-full bg-primary/20 border border-primary/50 text-accent font-bold tracking-widest uppercase text-sm mb-6 backdrop-blur-sm">
-            Vadodara's Premier Sports Destination
+            {SITE.heroBadge}
           </span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tight leading-[1.1] mb-6 drop-shadow-2xl">
             YOUR GAME.<br />
@@ -41,7 +42,7 @@ export function HeroSection() {
             VADODARA.
           </h1>
           <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto font-medium mb-10 drop-shadow-lg">
-            Premium Cricket · Football · Badminton Turf in Laxmipura, Vadodara
+            {SITE.heroSubtitle}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

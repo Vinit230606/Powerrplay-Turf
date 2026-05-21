@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { getMaxDailySlotCount } from "@/config/site";
 
 function Counter({ end, suffix = "", duration = 2 }: { end: number, suffix?: string, duration?: number }) {
   const [count, setCount] = useState(0);
@@ -38,7 +39,7 @@ export function StatsSection() {
     { value: 3, label: "Premium Sports" },
     { value: 500, suffix: "+", label: "Matches Played" },
     { value: 7, label: "Days a Week" },
-    { value: 16, label: "Hours Daily" }
+    { value: getMaxDailySlotCount(), label: "Hours of Play" }
   ];
 
   return (

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Zap, CalendarCheck, Layers, CreditCard, Clock } from "lucide-react";
+import { OPERATING_HOURS } from "@/config/site";
 
 const usps = [
   {
@@ -15,7 +16,7 @@ const usps = [
   {
     icon: CalendarCheck,
     title: "Easy Booking",
-    description: "Check availability instantly and confirm your slot in seconds via WhatsApp."
+    description: "Check live availability, pay online, and get instant booking confirmation on the website."
   },
   {
     icon: ShieldCheck,
@@ -30,7 +31,7 @@ const usps = [
   {
     icon: Clock,
     title: "Open 7 Days",
-    description: "Early morning practice or late night matches, we are open from 5 AM to 11 PM."
+    description: `Early morning practice or late night matches — ${OPERATING_HOURS.summary.replace("Open 7 days — ", "")}.`
   }
 ];
 

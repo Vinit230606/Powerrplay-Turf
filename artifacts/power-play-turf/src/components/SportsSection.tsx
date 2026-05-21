@@ -4,36 +4,19 @@ import { MdSportsCricket, MdSportsSoccer, MdSportsTennis } from "react-icons/md"
 import cricketImg from "../assets/images/cricket.png";
 import footballImg from "../assets/images/football.png";
 import badmintonImg from "../assets/images/badminton.png";
+import { SPORTS, formatPriceFrom, type SportId } from "@/config/site";
 
-const sports = [
-  {
-    id: "cricket",
-    name: "Box Cricket",
-    description: "Premium artificial turf with professional netting and powerful floodlights for the perfect night game.",
-    price: "From ₹800/hr",
-    icon: MdSportsCricket,
-    image: cricketImg,
-    color: "from-green-500/20 to-primary/80"
-  },
-  {
-    id: "football",
-    name: "5/7-a-side Football",
-    description: "FIFA-quality astroturf. Fast-paced, high-energy games on a surface built for performance and safety.",
-    price: "From ₹1000/hr",
-    icon: MdSportsSoccer,
-    image: footballImg,
-    color: "from-blue-500/20 to-blue-900/80"
-  },
-  {
-    id: "badminton",
-    name: "Pro Badminton",
-    description: "Synthetic wooden-finish indoor courts with anti-glare lighting and shock-absorbing flooring.",
-    price: "From ₹300/hr",
-    icon: MdSportsTennis,
-    image: badmintonImg,
-    color: "from-amber-500/20 to-accent/80"
-  }
-];
+const sportAssets: Record<SportId, { icon: typeof MdSportsCricket; image: string; color: string }> = {
+  cricket: { icon: MdSportsCricket, image: cricketImg, color: "from-green-500/20 to-primary/80" },
+  football: { icon: MdSportsSoccer, image: footballImg, color: "from-blue-500/20 to-blue-900/80" },
+  badminton: { icon: MdSportsTennis, image: badmintonImg, color: "from-amber-500/20 to-accent/80" },
+};
+
+const sports = SPORTS.map((sport) => ({
+  ...sport,
+  price: formatPriceFrom(sport.id),
+  ...sportAssets[sport.id],
+}));
 
 export function SportsSection() {
   const scrollTo = (id: string) => {

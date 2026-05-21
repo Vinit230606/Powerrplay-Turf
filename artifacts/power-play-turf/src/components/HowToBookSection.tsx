@@ -25,8 +25,8 @@ export function HowToBookSection() {
     {
       num: "03",
       icon: MessageCircle,
-      title: "Confirm & Play",
-      desc: "Send your details via WhatsApp to lock it in."
+      title: "Pay & Play",
+      desc: "Complete secure online payment and receive instant booking confirmation."
     }
   ];
 

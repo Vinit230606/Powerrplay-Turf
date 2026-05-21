@@ -13,6 +13,7 @@ import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { useGetSlots, useCreateBookingOrder, useVerifyPayment } from "@workspace/api-client-react";
+import { isFacilityOpen } from "@/config/site";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -42,13 +43,7 @@ export function BookingSection() {
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   useEffect(() => {
-    const check = () => {
-      const now = new Date();
-      const hour = now.getHours();
-      const day = now.getDay();
-      const isWeekend = day === 0 || day === 6;
-      setIsOpen(hour >= (isWeekend ? 5 : 6) && hour < (isWeekend ? 23 : 22));
-    };
+    const check = () => setIsOpen(isFacilityOpen());
     check();
     const interval = setInterval(check, 60000);
     return () => clearInterval(interval);

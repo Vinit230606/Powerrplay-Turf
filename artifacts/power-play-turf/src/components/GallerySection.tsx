@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { SOCIAL } from "@/config/site";
 import gallery1 from "../assets/images/gallery-1.png";
 import gallery2 from "../assets/images/gallery-2.png";
 import gallery3 from "../assets/images/gallery-3.png";
@@ -96,12 +97,12 @@ export function GallerySection() {
         
         <div className="mt-16 text-center">
           <a 
-            href="https://instagram.com/power_playturf" 
+            href={SOCIAL.instagram.url}
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-lg font-bold text-secondary hover:text-primary transition-colors border-b-2 border-secondary hover:border-primary pb-1 uppercase tracking-widest"
           >
-            Follow us @power_playturf
+            Follow us @{SOCIAL.instagram.handle}
           </a>
         </div>
       </div>

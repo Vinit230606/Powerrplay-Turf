@@ -1,17 +1,16 @@
-import { MapPin, Phone, Mail, Clock, Instagram } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import { CONTACT, OPERATING_HOURS, buildWhatsAppContactUrl } from "@/config/site";
 
 export function ContactSection() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const message = formData.get("message");
-    
-    const whatsappUrl = `https://wa.me/919558923855?text=Hi, this is ${name}. %0A${message}`;
-    window.open(whatsappUrl, '_blank');
+    const name = String(formData.get("name") ?? "");
+    const message = String(formData.get("message") ?? "");
+    window.open(buildWhatsAppContactUrl(name, message), "_blank");
   };
 
   return (
@@ -45,7 +44,7 @@ export function ContactSection() {
                 <MapPin className="text-primary mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-secondary uppercase mb-1">Location</h4>
-                  <p className="text-gray-600">Laxmipura Rd, Opposite Shree Harifarm,<br />Laxmipura, Vadodara, Gujarat 390023</p>
+                  <p className="text-gray-600">{CONTACT.address.line1},<br />{CONTACT.address.line2}</p>
                 </div>
               </div>
               
@@ -53,7 +52,7 @@ export function ContactSection() {
                 <Phone className="text-primary mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-secondary uppercase mb-1">Call Us</h4>
-                  <a href="tel:+919558923855" className="text-gray-600 hover:text-primary transition-colors">+91 95589 23855</a>
+                  <a href={`tel:${CONTACT.phoneE164}`} className="text-gray-600 hover:text-primary transition-colors">{CONTACT.phoneDisplay}</a>
                 </div>
               </div>
               
@@ -61,7 +60,7 @@ export function ContactSection() {
                 <Clock className="text-primary mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-secondary uppercase mb-1">Hours</h4>
-                  <p className="text-gray-600">Mon-Fri: 6 AM - 10 PM<br />Sat-Sun: 5 AM - 11 PM</p>
+                  <p className="text-gray-600">{OPERATING_HOURS.weekday.label}<br />{OPERATING_HOURS.weekend.label}</p>
                 </div>
               </div>
             </div>
@@ -70,7 +69,7 @@ export function ContactSection() {
           {/* Map */}
           <div className="h-[400px] lg:h-auto relative">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.9634289052024!2d73.1541!3d22.3175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPower+Play+Turf!5e0!3m2!1sen!2sin!4v1684000000000!5m2!1sen!2sin" 
+              src={CONTACT.maps.embedUrl} 
               className="absolute inset-0 w-full h-full border-0" 
               allowFullScreen={false} 
               loading="lazy" 
@@ -80,7 +79,7 @@ export function ContactSection() {
             
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 w-full px-6">
               <a 
-                href="https://maps.google.com/?q=22.3175,73.1541" 
+                href={CONTACT.maps.directionsUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-full bg-primary hover:bg-primary/90 text-white h-14 font-bold uppercase tracking-wider shadow-lg transition-colors"

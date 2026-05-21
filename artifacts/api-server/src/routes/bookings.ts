@@ -8,6 +8,12 @@ import {
   CreateBookingOrderBody,
   VerifyPaymentBody,
 } from "@workspace/api-zod";
+import {
+  PRICING,
+  generateSlots,
+  getPrice,
+  to12h,
+} from "@workspace/site-config";
 
 const router: IRouter = Router();
 
@@ -15,41 +21,6 @@ const razorpay = new Razorpay({
   key_id: process.env["RAZORPAY_KEY_ID"]!,
   key_secret: process.env["RAZORPAY_KEY_SECRET"]!,
 });
-
-const PRICING: Record<string, { day: number; evening: number }> = {
-  cricket:   { day: 800,  evening: 1100 },
-  football:  { day: 900,  evening: 1200 },
-  badminton: { day: 300,  evening: 400  },
-};
-
-function getPrice(sport: string, timeSlot: string): number {
-  const hour = parseInt(timeSlot.split(":")[0]!, 10);
-  const isEvening = hour >= 18;
-  const prices = PRICING[sport];
-  if (!prices) throw new Error("Invalid sport");
-  return isEvening ? prices.evening : prices.day;
-}
-
-function to12h(time24: string): string {
-  const [hStr, mStr] = time24.split(":");
-  const h = parseInt(hStr!, 10);
-  const suffix = h >= 12 ? "PM" : "AM";
-  const h12 = h % 12 === 0 ? 12 : h % 12;
-  return `${String(h12).padStart(2, "0")}:${mStr} ${suffix}`;
-}
-
-function generateSlots(dateStr: string): string[] {
-  const date = new Date(dateStr);
-  const day = date.getDay();
-  const isWeekend = day === 0 || day === 6;
-  const startHour = isWeekend ? 5 : 6;
-  const endHour = isWeekend ? 23 : 22;
-  const slots: string[] = [];
-  for (let h = startHour; h < endHour; h++) {
-    slots.push(`${String(h).padStart(2, "0")}:00`);
-  }
-  return slots;
-}
 
 router.get("/bookings/slots", async (req, res): Promise<void> => {
   const parsed = GetSlotsQueryParams.safeParse(req.query);
@@ -60,7 +31,7 @@ router.get("/bookings/slots", async (req, res): Promise<void> => {
 
   const { sport, date } = parsed.data;
 
-  if (!PRICING[sport]) {
+  if (!PRICING[sport as keyof typeof PRICING]) {
     res.status(400).json({ error: "Invalid sport" });
     return;
   }
@@ -98,7 +69,7 @@ router.post("/bookings/order", async (req, res): Promise<void> => {
 
   const { sport, date, timeSlot, name, phone, players } = parsed.data;
 
-  if (!PRICING[sport]) {
+  if (!PRICING[sport as keyof typeof PRICING]) {
     res.status(400).json({ error: "Invalid sport" });
     return;
   }
