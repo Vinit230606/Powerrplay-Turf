@@ -5,24 +5,46 @@ import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    text: "Best turf in Vadodara! The surface is world-class and floodlights make evening games incredible.",
-    name: "Raj Patel",
-    role: "Weekend Cricket Team"
+    text: "I recently visited Power Play Turf and had a great experience. The turf is well-maintained, spacious, and perfect for a fun game with friends. The lighting and facilities are good too. Overall, it's a nice spot to enjoy a match and spend quality time.",
+    name: "Kripalsinh",
+    role: "Local Guide · 55 reviews",
+    stars: 5
   },
   {
-    text: "Booked for our office team outing — smooth booking, amazing facility. Everyone had a blast!",
-    name: "Priya Shah",
-    role: "Corporate Group"
+    text: "Great badminton coaching and nice kind polite owners!",
+    name: "Reni Antony",
+    role: "Local Guide · 32 reviews",
+    stars: 5
   },
   {
-    text: "My go-to for badminton practice. Courts are well-maintained, staff is friendly.",
-    name: "Arjun Mehta",
-    role: "Badminton Player"
+    text: "It's amazing experience, close net with well manner grounds. Parking area is good. There is all cricket stuff available needed to play.",
+    name: "Shivam Parmar",
+    role: "Local Guide · 12 reviews",
+    stars: 5
   },
   {
-    text: "Perfect 5-a-side football venue. Turf quality is fantastic and pricing is very fair.",
-    name: "Rohan Desai",
-    role: "Football Team"
+    text: "Excellent place and they provide the accessories for both football and cricket. Overall I am glad to say that the experience is good.",
+    name: "Chandreshwar Thakur",
+    role: "Google Review",
+    stars: 5
+  },
+  {
+    text: "Nice and affordable turf.",
+    name: "Trupal Solanki",
+    role: "Google Review",
+    stars: 5
+  },
+  {
+    text: "Very good.",
+    name: "Ashok Mali",
+    role: "Google Review",
+    stars: 5
+  },
+  {
+    text: "Good place.",
+    name: "Yug Patel",
+    role: "Google Review",
+    stars: 5
   }
 ];
 
@@ -64,9 +86,7 @@ export function TestimonialsSection() {
           >
             WHAT PLAYERS SAY
           </motion.h2>
-          <div className="flex justify-center gap-1">
-            {[1, 2, 3, 4, 5].map(i => <Star key={i} size={24} className="fill-primary text-primary" />)}
-          </div>
+          <p className="text-white/50 text-sm uppercase tracking-widest">Real Google Reviews</p>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -75,7 +95,12 @@ export function TestimonialsSection() {
               {testimonials.map((t, index) => (
                 <div className="flex-[0_0_100%] min-w-0 px-4 md:px-12" key={index}>
                   <div className="flex flex-col items-center text-center">
-                    <p className="text-xl md:text-3xl font-medium leading-relaxed mb-8 italic">
+                    <div className="flex gap-1 mb-6">
+                      {Array.from({ length: t.stars }).map((_, i) => (
+                        <Star key={i} size={20} className="fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <p className="text-xl md:text-2xl font-medium leading-relaxed mb-8 italic">
                       "{t.text}"
                     </p>
                     <div className="h-1 w-12 bg-primary mb-6"></div>
