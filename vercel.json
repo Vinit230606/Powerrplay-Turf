@@ -1,7 +1,7 @@
 {
   "version": 2,
   "installCommand": "pnpm install --ignore-scripts",
-  "buildCommand": "pnpm --filter @workspace/power-play-turf run build",
+  "buildCommand": "pnpm build",
   "outputDirectory": "artifacts/power-play-turf/dist/public",
   "framework": null,
   "functions": {

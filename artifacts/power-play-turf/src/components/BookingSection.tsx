@@ -61,8 +61,8 @@ export function BookingSection() {
   const dateStr = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
 
   const { data: slots, isLoading: slotsLoading } = useGetSlots(
-    { sport: selectedSport, date: dateStr },
-    { query: { enabled: !!selectedSport && !!dateStr } }
+    { sport: selectedSport!, date: dateStr },
+    { query: { enabled: !!selectedSport && !!dateStr } } as never
   );
 
   const createOrder = useCreateBookingOrder();
