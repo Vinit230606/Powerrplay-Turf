@@ -29,6 +29,7 @@ function Counter({ end, suffix = "", duration = 2 }: { end: number, suffix?: str
       animationFrame = requestAnimationFrame(animate);
       return () => cancelAnimationFrame(animationFrame);
     }
+    return;
   }, [end, duration, isInView]);
 
   return <span ref={ref}>{count}{suffix}</span>;
