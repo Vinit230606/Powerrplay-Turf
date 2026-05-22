@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "npm install -g pnpm@9.15.0 && pnpm install --ignore-scripts --no-frozen-lockfile",
+  "installCommand": "npm install -g pnpm@10.11.0 && pnpm install --ignore-scripts --no-frozen-lockfile",
   "buildCommand": "pnpm --filter @workspace/power-play-turf run build",
   "outputDirectory": "artifacts/power-play-turf/dist/public",
   "framework": null,
